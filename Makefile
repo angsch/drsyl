@@ -4,8 +4,8 @@
 TARGET := drsyl
 DEFINES := -DNDEBUG #-DINTSCALING
 
-# Select compiler and linker: intel, gnu
-COMPILER := gnu
+# Select compiler and linker: intel, gnu, llvm
+COMPILER := llvm
 
 # Set global defines
 DEFINES += -DALIGNMENT=64
@@ -24,6 +24,13 @@ ifeq ($(COMPILER), intel)
 	CFLAGS   := -Wall -std=gnu99 -O2 -xHost -malign-double -qopt-prefetch -qopenmp -ipo
 	LDFLAGS  := -ipo -qopt-report=1 -qopt-report-phase=vec -qopenmp
 	LIBS     += -mkl
+else ifeq ($(COMPILER), llvm)
+	CC       := clang
+	DEFINES  +=
+	WFLAGS   := -Wall -Werror -Wno-missing-braces -Wno-error=unknown-pragmas
+	CFLAGS   := $(WFLAGS) -std=gnu99 -O3 -march=native -fopenmp -funroll-loops
+	LDFLAGS  := -fopenmp -flto
+	LIBS     += -lopenblas -fopenmp
 else # gnu
 	CC       := gcc
 	DEFINES  +=
