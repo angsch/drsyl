@@ -28,3 +28,7 @@ For a quick test, type `./drsyl 5000 5000 400 0.5 0.5 1 0 0`. The solver uses ta
 By default, a double-precision number is used for the scaling factor s. Sometimes the systems grow so quickly that overflow protection with a double-precision scaling factor does not suffice. Then setting `-DINTSCALING` during the build process activates integer scaling factors and allows for solving systems that are not solvable by a double-precision scaling factor. This change requires a complete rebuild (`make clean`, `make`).
 
 More information can be found [here](https://people.cs.umu.se/angies/sylvester).
+
+## Publication Reference
+
+Schwarz, A., Kjelgaard Mikkelsen, C.C. (2020). Robust Task-Parallel Solution of the Triangular Sylvester Equation. In: Wyrzykowski, R., Deelman, E., Dongarra, J., Karczewski, K. (eds) Parallel Processing and Applied Mathematics. PPAM 2019. Lecture Notes in Computer Science(), vol 12043. Springer, Cham.  https://doi.org/10.1007/978-3-030-43229-4_8
